@@ -7,7 +7,7 @@ import serverless from "serverless-http";
 const app = Express();
 const PORT = 3000;
 
-const DB = "mongodb://localhost:27017/VPN_BOT";
+const DB = process.env.MONGODB_URI;
 
 app.use(Express.json());
 app.use("/api", router);
