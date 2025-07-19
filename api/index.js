@@ -2,6 +2,7 @@ import Express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import router from "../router/index.js";
+import dotenv from "dotenv";
 const app = Express();
 
 const PORT = process.env.PORT || 3000;
