@@ -2,6 +2,7 @@ import Express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import router from "../router/index.js";
+import serverless from "serverless-http";
 
 const app = Express();
 const PORT = 3000;
@@ -41,3 +42,5 @@ const bootstrap = async () => {
 };
 
 bootstrap();
+
+export default serverless(app);
