@@ -2,20 +2,20 @@ import Express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import router from "../router/index.js";
-import serverless from "serverless-http";
-
 const app = Express();
-const PORT = 3000;
 
+const PORT = process.env.PORT || 3000;
+dotenv.config();
 const DB = process.env.MONGODB_URI;
 
 app.use(Express.json());
-app.use("/api", router);
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
-const bootstrap = async () => {
+app.use("/api", router);
+
+const StarterFunc = async () => {
   try {
     await mongoose.connect(DB);
     app.listen(PORT, () => {
@@ -24,14 +24,14 @@ const bootstrap = async () => {
         `\x1b[32m`,
         `
         ================================
+        
        ___  __  ___  _______  _______
       / _ \\/ / / / |/ /  _/ |/ / ___/
      / , _/ /_/ /    // //    / (_ / 
     /_/|_|\\____/_/|_/___/_/|_/\\___/  
     
+    
     =================================                            
-    [+] Server         : http://localhost:${PORT}
-    [~] Running Server...
 `,
         `\x1b[0m`
       );
@@ -41,6 +41,4 @@ const bootstrap = async () => {
   }
 };
 
-bootstrap();
-
-export default serverless(app);
+StarterFunc().then(() => console.log("Server started successfully!"));
