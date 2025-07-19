@@ -20,7 +20,7 @@ class User {
           },
           confirmation: {
             type: "redirect",
-            return_url: "https://api-vpn-bot.vercel.app/callback", // заменишь позже
+            return_url: "https://api-vpn-bot.vercel.app/api/callback",
           },
           capture: true,
           description: description || "Оплата",
