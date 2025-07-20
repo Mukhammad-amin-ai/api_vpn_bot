@@ -7,19 +7,18 @@ const TelegramProfile = new mongoose.Schema({
 });
 
 const VpnStatus = new mongoose.Schema({
-  key: { type: Number, default: null },
-  starting_date: { type: Number, default: null },
-  status_is_active: { type: Boolean, default: false },
-  ending_date: { type: Number, default: null },
+  key: { type: String, required: true },
+  status: { type: Boolean, default: false },
+  status_name: { type: String, required: true },
+  starting_date: { type: Date, default: null },
+  starting_date_timestamp: { type: Number, default: null },
+  ending_date: { type: Date, default: null },
+  ending_date_timestamp: { type: Number, default: null },
 });
 
-const Users = new mongoose.Schema({
-  tg_profile: {
-    type: TelegramProfile,
-  },
-  status: {
-    type: VpnStatus,
-  },
+const UserSchema = new mongoose.Schema({
+  tg_profile: TelegramProfile, // ✅ не надо { type: ... }
+  vpn: VpnStatus, // ✅ так же
 });
 
-export default mongoose.model("Users", Users);
+export default mongoose.model("User", UserSchema);

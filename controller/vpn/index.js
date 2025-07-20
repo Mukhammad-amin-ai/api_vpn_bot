@@ -37,7 +37,10 @@ class VPNController {
 
   async generateKey(req, res) {
     try {
-      const response = await AXIOS_INSTANCE.post();
+      const { name } = req.body;
+      const response = await AXIOS_INSTANCE.post("/access-keys", {
+        name: name,
+      });
       return res.json({ key: response.data });
     } catch (error) {
       console.error(error);

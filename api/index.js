@@ -5,7 +5,7 @@ import router from "../router/index.js";
 import dotenv from "dotenv";
 const app = Express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 dotenv.config();
 const DB = process.env.MONGODB_URI;
 
@@ -31,7 +31,7 @@ const StarterFunc = async () => {
      / , _/ /_/ /    // //    / (_ / 
     /_/|_|\\____/_/|_/___/_/|_/\\___/  
     
-    
+    []:${PORT}
     =================================                            
 `,
         `\x1b[0m`
