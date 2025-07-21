@@ -2,8 +2,7 @@ import axios from "axios";
 import https from "https";
 import dotenv from "dotenv";
 
-const envFile =
-  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local";
+const envFile = process.env.NODE_ENV === "local" ? ".env.local" : ".env";
 dotenv.config({ path: envFile });
 
 const AXIOS_INSTANCE = axios.create({
