@@ -5,10 +5,11 @@ import Key from "../../schema/keys/index.js";
 import UserSchema from "../../schema/user/index.js";
 import { v4 as uuidv4 } from "uuid";
 
-dotenv.config();
+const envFile =
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local";
+dotenv.config({ path: envFile });
 
-const TELEGRAM_BOT_TOKEN = "7738577791:AAFC4gQUbWk3XgLNRwniD8jYto0117J6xo4";
-const TELEGRAM_CHAT_ID = "526075074";
+const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN;
 
 const HandleDate = (time, created) => {
   const createdDate = new Date(created);

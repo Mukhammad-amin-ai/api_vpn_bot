@@ -6,7 +6,9 @@ import dotenv from "dotenv";
 const app = Express();
 
 const PORT = process.env.PORT || 3001;
-dotenv.config();
+const envFile =
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local";
+dotenv.config({ path: envFile });
 
 const DB = process.env.MONGODB_URI;
 

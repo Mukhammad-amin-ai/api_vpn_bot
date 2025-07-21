@@ -2,7 +2,9 @@ import axios from "axios";
 import https from "https";
 import dotenv from "dotenv";
 
-dotenv.config();
+const envFile =
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local";
+dotenv.config({ path: envFile });
 
 const AXIOS_INSTANCE = axios.create({
   baseURL: process.env.API_URL,
