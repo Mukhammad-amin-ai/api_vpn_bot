@@ -4,7 +4,7 @@
   "main": "api/index.js",
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node api/index.js",
+    "start": "node api/index.js",
     "dev": "cross-env NODE_ENV=local nodemon api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

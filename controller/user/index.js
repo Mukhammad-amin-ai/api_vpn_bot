@@ -5,8 +5,7 @@ import Key from "../../schema/keys/index.js";
 import UserSchema from "../../schema/user/index.js";
 import { v4 as uuidv4 } from "uuid";
 
-const envFile =
-  process.env.NODE_ENV === "production" ? ".env.production" : ".env.local";
+const envFile = process.env.NODE_ENV === "local" ? ".env.local" : ".env";
 dotenv.config({ path: envFile });
 
 const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN;
