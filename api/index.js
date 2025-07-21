@@ -7,6 +7,7 @@ const app = Express();
 
 const PORT = process.env.PORT || 3001;
 dotenv.config();
+
 const DB = process.env.MONGODB_URI;
 
 app.use(Express.json());
