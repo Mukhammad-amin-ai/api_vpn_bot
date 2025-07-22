@@ -1,8 +1,10 @@
 import Express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
-import router from "../router/index.js";
+import cron from "node-cron";
 import dotenv from "dotenv";
+import router from "../router/index.js";
+import { checkExpiredKeysLogic } from "../controller/cron/index.js";
 const app = Express();
 
 const PORT = process.env.PORT || 3001;
@@ -19,16 +21,19 @@ app.use(
 
 app.use("/api", router);
 
+cron.schedule("* * * * *", () => {
+  checkExpiredKeysLogic()
+    .then(() => console.log("⏱️ Cron: проверка завершена"))
+    .catch((err) => console.error("❌ Ошибка в cron-задаче", err));
+});
+
 const StarterFunc = async () => {
   try {
     await mongoose.connect(DB);
     app.listen(PORT, () => {
       console.log("NODE_ENV:", process.env.NODE_ENV);
       console.log("Loaded from:", envFile);
-      console.log(
-        "MONGODB_URI:",
-        process.env.MONGODB_URI
-      );
+      console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
       console.log(
         `\x1b[40m`,

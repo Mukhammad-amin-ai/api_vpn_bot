@@ -3,6 +3,8 @@ import axios from "axios";
 import https from "https";
 import Key from "../../schema/keys/index.js";
 import UserSchema from "../../schema/user/index.js";
+import { checkExpiredKeysLogic } from "../cron/index.js";
+
 import { v4 as uuidv4 } from "uuid";
 
 const envFile = process.env.NODE_ENV === "local" ? ".env.local" : ".env";
@@ -180,6 +182,16 @@ ${generated_key.data.accessUrl}
         error.response?.data || error.message
       );
       return res.sendStatus(500);
+    }
+  }
+
+  async CheckExpiredKeys(req, res) {
+    try {
+      await checkExpiredKeysLogic();
+      res.status(200).json({message:"OK"});
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Ошибка при проверке ключей" });
     }
   }
 }

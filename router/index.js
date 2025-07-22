@@ -10,4 +10,6 @@ router.post("/generate-key", vpn.generateKey);
 router.post("/create-payment", user.CreatePayment);
 router.post("/catch-payment", user.CatchWebhook);
 
+router.get('/chech-user',user.CheckExpiredKeys)
+
 export default router;
