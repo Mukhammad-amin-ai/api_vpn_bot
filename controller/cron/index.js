@@ -11,15 +11,10 @@ export const checkExpiredKeysLogic = async () => {
     if (expiresAt && now > expiresAt) {
       console.log(`❌ Ключ просрочен для user_id ${keyObj.user_id}`);
 
-      keyObj.key = null;
-      keyObj.status = false;
-      keyObj.status_name = "Expired";
-      keyObj.date.starting_date = null;
-      keyObj.date.starting_date_timestamp = null;
-      keyObj.date.ending_date = null;
-      keyObj.date.ending_date_timestamp = null;
-      await keyObj.save();
+      // Удаление ключа из коллекции
+      await Key.deleteOne({ _id: keyObj._id });
 
+      // Обновление профиля пользователя
       const user = await UserSchema.findOne({
         "tg_profile.user_id": keyObj.user_id,
       });
